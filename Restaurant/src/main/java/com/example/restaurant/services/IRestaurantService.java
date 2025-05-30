@@ -7,14 +7,13 @@ import java.util.Map;
 
 public interface IRestaurantService {
 
-    RestaurantDto add(RestaurantDto productDto);
+    RestaurantDto add(RestaurantDto restaurantDto);
 
-    RestaurantDto update(String idProduct, Map<Object,Object> fields);
+    RestaurantDto update(String idRestaurant, Map<Object, Object> fields);
 
-    boolean delete(String idProduct);
+    boolean delete(String idRestaurant);
 
-
-    Page<RestaurantDto> getRestaurant(int pageNbr, int pageSize);
+    Page<RestaurantDto> getRestaurants(int pageNbr, int pageSize);
 
     RestaurantDto getRestaurant(String id);
 

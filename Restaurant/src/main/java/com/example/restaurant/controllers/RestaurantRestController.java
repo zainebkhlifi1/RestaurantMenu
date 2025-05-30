@@ -1,54 +1,47 @@
 package com.example.restaurant.controllers;
 
 import com.example.restaurant.dto.RestaurantDto;
+import com.example.restaurant.services.IRestaurantService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/restaurants")
 @RequiredArgsConstructor
-public class RestaurantRestController{
+public class RestaurantRestController {
 
-    private final com.example.springcrudmongodb.services.IRestaurantService productService;
+    private final IRestaurantService restaurantService;
 
     @PostMapping
-    public RestaurantDto add(@RequestBody RestaurantDto productDto) {
-        return productService.add(restuarntDto);
+    public RestaurantDto add(@RequestBody RestaurantDto restaurantDto) {
+        return restaurantService.add(restaurantDto);
     }
 
-    @PatchMapping("{id}")
-    public ProductDto patchUpdate(@RequestBody Map<Object,Object> fields, @PathVariable String id){
-        return productService.update(id,fields);
+    @PatchMapping("/{id}")
+    public RestaurantDto patchUpdate(@RequestBody Map<Object, Object> fields, @PathVariable String id) {
+        return restaurantService.update(id, fields);
     }
 
-    @DeleteMapping("{id}")
-    public boolean delete( @PathVariable String id){
-        return productService.delete(id);
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable String id) {
+        return restaurantService.delete(id);
     }
-
 
     @GetMapping
-    public Page<ProductDto> getProducts(int pageNbr,int pageSize){
-        return productService.getProducts(pageNbr,pageSize);
+    public Page<RestaurantDto> getRestaurants(@RequestParam int pageNbr, @RequestParam int pageSize) {
+        return restaurantService.getRestaurants(pageNbr, pageSize);
     }
 
-    @GetMapping("{id}")
-    public ProductDto getProduct(@PathVariable String id){
-        return productService.getProduct(id);
+    @GetMapping("/{id}")
+    public RestaurantDto getRestaurant(@PathVariable String id) {
+        return restaurantService.getRestaurant(id);
     }
 
-    @GetMapping("name/{name}")
-    public ProductDto getProductByName(@PathVariable String name){
-        return productService.getProductByName(name);
+    @GetMapping("/name/{name}")
+    public RestaurantDto getRestaurantByName(@PathVariable String name) {
+        return restaurantService.getRestaurantByName(name);
     }
-
-
-
-
-
-
-
 }
