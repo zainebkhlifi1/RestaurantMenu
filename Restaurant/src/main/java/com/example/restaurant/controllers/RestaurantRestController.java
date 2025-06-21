@@ -1,11 +1,13 @@
 package com.example.restaurant.controllers;
 
 import com.example.restaurant.dto.RestaurantDto;
+import com.example.restaurant.entities.Restaurant;
 import com.example.restaurant.services.IRestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -31,7 +33,7 @@ public class RestaurantRestController {
     }
 
     @GetMapping
-    public Page<RestaurantDto> getRestaurants(@RequestParam int pageNbr, @RequestParam int pageSize) {
+    public List<Restaurant> getRestaurants(@RequestParam int pageNbr, @RequestParam int pageSize) {
         return restaurantService.getRestaurants(pageNbr, pageSize);
     }
 

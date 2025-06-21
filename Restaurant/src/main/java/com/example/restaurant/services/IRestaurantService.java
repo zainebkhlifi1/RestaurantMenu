@@ -1,8 +1,9 @@
 package com.example.restaurant.services;
 
 import com.example.restaurant.dto.RestaurantDto;
-import org.springframework.data.domain.Page;
+import com.example.restaurant.entities.Restaurant;
 
+import java.util.List;
 import java.util.Map;
 
 public interface IRestaurantService {
@@ -13,7 +14,7 @@ public interface IRestaurantService {
 
     boolean delete(String idRestaurant);
 
-    Page<RestaurantDto> getRestaurants(int pageNbr, int pageSize);
+    List<Restaurant> getRestaurants(int pageNbr, int pageSize);
 
     RestaurantDto getRestaurant(String id);
 

@@ -5,8 +5,6 @@ import com.example.restaurant.entities.Restaurant;
 import com.example.restaurant.mappers.RestaurantMapper;
 import com.example.restaurant.repositories.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
 
@@ -14,6 +12,7 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -60,9 +59,8 @@ public class IRestaurantServiceImpl implements IRestaurantService {
     }
 
     @Override
-    public Page<RestaurantDto> getRestaurants(int pageNbr, int pageSize) {
-        return restaurantRepository.findAll(PageRequest.of(pageNbr, pageSize))
-                .map(restaurantMapper::mapToDto);
+    public List<Restaurant> getRestaurants(int pageNbr, int pageSize) {
+        return restaurantRepository.findAll();
     }
 
     @Override
