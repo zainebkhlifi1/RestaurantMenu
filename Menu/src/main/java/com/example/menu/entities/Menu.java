@@ -1,10 +1,13 @@
 package com.example.menu.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
