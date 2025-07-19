@@ -1,5 +1,7 @@
 package com.example.restaurant.services;
 
+import com.example.restaurant.clients.MenuClient;
+import com.example.restaurant.dto.MenuDto;
 import com.example.restaurant.dto.RestaurantDto;
 import com.example.restaurant.entities.Restaurant;
 import com.example.restaurant.mappers.RestaurantMapper;
@@ -7,7 +9,6 @@ import com.example.restaurant.repositories.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
-
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ public class IRestaurantServiceImpl implements IRestaurantService {
 
     private final RestaurantRepository restaurantRepository;
     private final RestaurantMapper restaurantMapper;
+    private final MenuClient menuClient;
 
     @Override
     public RestaurantDto add(RestaurantDto restaurantDto) {
@@ -54,7 +56,12 @@ public class IRestaurantServiceImpl implements IRestaurantService {
 
     @Override
     public boolean delete(String idRestaurant) {
+        if (restaurantRepository.existsById(idRestaurant)){
+//            throw new ResourceNotFoundException("UserProfile not found with id: " + idRestaurant);
+
+        }
         restaurantRepository.deleteById(idRestaurant);
+
         return !restaurantRepository.existsById(idRestaurant);
     }
 
@@ -76,4 +83,17 @@ public class IRestaurantServiceImpl implements IRestaurantService {
                 .map(restaurantMapper::mapToDto)
                 .orElseThrow(() -> new IllegalArgumentException("Restaurant not found with this name"));
     }
+
+    @Override
+    public List<MenuDto> fetchMenus() {
+        return menuClient.getMenus(0, 5); // test avec page 0 et taille 5
+    }
+
+    @Override
+    public void testCommunicationMenu() {
+        List<MenuDto> menus = menuClient.getMenus(0, 5);
+        System.out.println("Menus reçus du service Menu :");
+        menus.forEach(menu -> System.out.println(menu.name() + " - " + menu.price()));
+    }
+
 }

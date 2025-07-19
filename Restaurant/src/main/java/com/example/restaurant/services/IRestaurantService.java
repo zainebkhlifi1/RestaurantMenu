@@ -1,8 +1,10 @@
 package com.example.restaurant.services;
 
+import com.example.restaurant.dto.MenuDto;
 import com.example.restaurant.dto.RestaurantDto;
 import com.example.restaurant.entities.Restaurant;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
@@ -19,4 +21,8 @@ public interface IRestaurantService {
     RestaurantDto getRestaurant(String id);
 
     RestaurantDto getRestaurantByName(String name);
+
+    List<MenuDto> fetchMenus();
+    // méthode de test communication (optionnelle)
+    void testCommunicationMenu();
 }
